@@ -1,16 +1,18 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
 import AdminDashboard from "./pages/AdminDashboard";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
