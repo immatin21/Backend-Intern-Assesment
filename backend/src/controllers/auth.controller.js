@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import { generateToken } from "../utils/generateToken.js";
 import { errorResponse, successResponse } from "../utils/apiResponse.js";
 
+// Sign up controller
 export const signup = async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
@@ -46,6 +47,58 @@ export const signup = async (req, res) => {
     });
 
     return successResponse(res, 201, "Signup successful", {
+      token,
+      user: {
+        id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return errorResponse(res, 500, "Server error");
+  }
+};
+
+// Login controller 
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+// Checking is email and password is empty or not
+    if (!email || !password) {
+      return errorResponse(res, 400, "Email and password are required");
+    }
+
+// Finding User from Db using email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return errorResponse(res, 401, "Invalid credentials");
+    }
+
+// Checking the status of user either active or inactive
+    if (user.status === "inactive") {
+      return errorResponse(res, 403, "Account is deactivated");
+    }
+
+// Comparing the inputted password with stored password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return errorResponse(res, 401, "Invalid credentials");
+    }
+
+// Changing the login time of user whenever sign in's
+    user.lastLogin = new Date();
+    await user.save();
+
+// Generating JSON web token
+    const token = generateToken({
+      id: user._id,
+      role: user.role,
+    });
+
+    return successResponse(res, 200, "Login successful", {
       token,
       user: {
         id: user._id,
