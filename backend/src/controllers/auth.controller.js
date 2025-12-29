@@ -112,3 +112,8 @@ export const login = async (req, res) => {
     return errorResponse(res, 500, "Server error");
   }
 };
+
+// Current user 
+export const getMe = async (req, res) => {
+  return successResponse(res, 200, "User profile", req.user);
+};
