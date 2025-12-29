@@ -1,6 +1,8 @@
 import User from "../models/User.js";
 import { successResponse } from "../utils/apiResponse.js";
 import { errorResponse } from "../utils/apiError.js";
+import bcrypt from "bcrypt";
+
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -48,6 +50,54 @@ export const updateUserStatus = async (req, res) => {
     await user.save();
 
     return successResponse(res, 200, "User status updated");
+  } catch (error) {
+    return errorResponse(res, 500, "Server error");
+  }
+};
+
+// Self profile updation
+
+export const updateProfile = async (req, res) => {
+  try {
+    const { fullName, email } = req.body;
+
+    if (!fullName || !email) {
+      return errorResponse(res, 400, "All fields required");
+    }
+
+    req.user.fullName = fullName;
+    req.user.email = email;
+
+    await req.user.save();
+
+    return successResponse(res, 200, "Profile updated", req.user);
+  } catch (error) {
+    return errorResponse(res, 500, "Server error");
+  }
+};
+
+// Change password
+export const changePassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return errorResponse(res, 400, "All fields required");
+    }
+
+    const isMatch = await bcrypt.compare(
+      currentPassword,
+      req.user.password
+    );
+
+    if (!isMatch) {
+      return errorResponse(res, 401, "Current password incorrect");
+    }
+
+    req.user.password = await bcrypt.hash(newPassword, 10);
+    await req.user.save();
+
+    return successResponse(res, 200, "Password updated");
   } catch (error) {
     return errorResponse(res, 500, "Server error");
   }
