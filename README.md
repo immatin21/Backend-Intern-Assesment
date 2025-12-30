@@ -193,6 +193,13 @@ VITE_API_BASE_URL
 - Project follows clean folder structure and modular design
 - Suitable for production deployment and further scaling
 
+### Admin Access for Testing
+
+The application supports role-based access control using the `role` field stored in the database.
+Admin privileges are enforced at the API level.
+
+An admin user is pre-seeded for testing admin-specific features.
+
 ## Author
 
 - Matin Mondal
