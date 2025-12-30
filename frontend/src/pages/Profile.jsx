@@ -38,9 +38,9 @@ const Profile = () => {
       });
       setCurrentPassword("");
       setNewPassword("");
-      alert("Password updated");
+      toast.success("Password updated");
     } catch {
-      alert("Password update failed");
+      toast.error("Password update failed");
     } finally {
       setLoading(false);
     }
