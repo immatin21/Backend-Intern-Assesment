@@ -101,102 +101,100 @@ BACKEND-INTERN-ASSESMENT
 cd backend
 npm install
 
-## Create a .env file in /backend:
+# Create a .env file in /backend:
 
 PORT=5500
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 
-## Start the backend server:
+# Start the backend server:
 
 npm run dev
 
-## Backend will run on:
+# Backend will run on:
 
 http://localhost:5500 
 
----
-
-### Frontend Setup
+# Frontend Setup
 
 cd frontend
 npm install
 
-## Create a .env file in /frontend:
+# Create a .env file in /frontend:
 
 VITE_API_BASE_URL=http://localhost:5500/api
 
-## Start the frontend:
+# Start the frontend:
 
 npm run dev
 
-## Frontend will run on:
+# Frontend will run on:
 
 http://localhost:5173
 
----
+## Environment Variables
 
-### Environment Variables
-
-## Backend
+# Backend
 
 PORT
 MONGO_URI
 JWT_SECRET
 
-## Frontend
+# Frontend
 
 VITE_API_BASE_URL
 
-### Deployment Links
+```
 
-## Frontend (Vercel):
-https://usermanagement-pied.vercel.app
+## Deployment Links
 
-## Backend (Render):
-https://backend-user-management-5fl8.onrender.com
+# Frontend (Vercel):
+- https://usermanagement-pied.vercel.app
 
-### API Documentation
+# Backend (Render):
+- https://backend-user-management-5fl8.onrender.com
 
-## Postman Collection:
-https://www.postman.com/matinmondal/workspace/public-api-docs/collection/44571133-01c1d665-d071-4fbf-8083-36fa32f6f6a1?action=share&creator=44571133
+## API Documentation
+
+# Postman Collection:
+- https://www.postman.com/matinmondal/workspace/public-api-docs/collection/44571133-01c1d665-d071-4fbf-8083-36fa32f6f6a1?action=share&creator=44571133
 
 ## The Postman collection includes:
 
-# Authentication APIs
-# Admin user management APIs
-# User profile APIs
-# Example requests and responses (200, 400, 401, 403)
+- Authentication APIs
+- Admin user management APIs
+- User profile APIs
+- Example requests and responses (200, 400, 401, 403)
 
-### Sample API Endpoints
+## Sample API Endpoints
 
-## Authentication
+# Authentication
 
-POST /api/auth/signup
-POST /api/auth/login
-GET /api/auth/me
+- POST /api/auth/signup
+- POST /api/auth/login
+- GET /api/auth/me
 
-## Admin
+# Admin
 
-GET /api/users?page=1
-PATCH /api/users/:id/status
+- GET /api/users?page=1
+- PATCH /api/users/:id/status
 
-## User
+# User
 
-GET /api/users/profile
-PATCH /api/users/profile
-PATCH /api/users/change-password
+- GET /api/users/profile
+- PATCH /api/users/profile
+- PATCH /api/users/change-password
 
 ### Notes for Reviewers
 
-# All sensitive data is stored in environment variables and excluded via .gitignore
-# Role-based authorization is enforced at API level
-# Pagination is implemented server-side
-# Project follows clean folder structure and modular design
-# Suitable for production deployment and further scaling
+- All sensitive data is stored in environment variables and excluded via .gitignore
+- Role-based authorization is enforced at API level
+- Pagination is implemented server-side
+- Project follows clean folder structure and modular design
+- Suitable for production deployment and further scaling
 
 ### Author
 
-Matin Mondal
-Backend Developer Intern Candidate
-GitHub: https://github.com/immatin21/Backend-Intern-Assesment
+- Matin Mondal
+- Backend Developer Intern Candidate
+- GitHub: https://github.com/immatin21/Backend-Intern-Assesment
