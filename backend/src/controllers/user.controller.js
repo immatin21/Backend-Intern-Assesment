@@ -30,7 +30,6 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-// Updating User status
 export const updateUserStatus = async (req, res) => {
   try {
     const { id } = req.params;
@@ -46,9 +45,6 @@ export const updateUserStatus = async (req, res) => {
     }
 
     user.status = status;
-    if (user.status === "inactive") {
-      return errorResponse(res, 403, "Account is deactivated");
-    }
     await user.save();
 
     return successResponse(res, 200, "User status updated");
@@ -56,6 +52,7 @@ export const updateUserStatus = async (req, res) => {
     return errorResponse(res, 500, "Server error");
   }
 };
+
 
 // Self profile updation
 

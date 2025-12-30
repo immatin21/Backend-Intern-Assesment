@@ -18,6 +18,14 @@ export const protect = async (req, res, next) => {
       return errorResponse(res, 401, "Unauthorized");
     }
 
+    if (user.status !== "active") {
+      return errorResponse(
+        res,
+        403,
+        "Your account is inactive. Please contact admin."
+      );
+    }
+
     req.user = user;
     next();
   } catch (error) {
