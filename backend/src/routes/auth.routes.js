@@ -4,12 +4,12 @@ import {
   login,
   getMe
 } from "../controllers/auth.controller.js";
-import { protect } from "../middleware/auth.middleware.js";
+import { protect } from "../middlewares/auth.middleware.js";
 
 const authRouter = express.Router();
 
-router.post("/signup", signup);
-router.post("/login", login);
-router.get("/me", protect, getMe);
+authRouter.post("/signup", signup);
+authRouter.post("/login", login);
+authRouter.get("/me", protect, getMe);
 
 export default authRouter;

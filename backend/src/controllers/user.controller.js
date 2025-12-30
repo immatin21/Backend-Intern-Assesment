@@ -3,7 +3,6 @@ import { successResponse } from "../utils/apiResponse.js";
 import { errorResponse } from "../utils/apiError.js";
 import bcrypt from "bcrypt";
 
-
 export const getAllUsers = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -47,6 +46,9 @@ export const updateUserStatus = async (req, res) => {
     }
 
     user.status = status;
+    if (user.status === "inactive") {
+      return errorResponse(res, 403, "Account is deactivated");
+    }
     await user.save();
 
     return successResponse(res, 200, "User status updated");
@@ -77,6 +79,7 @@ export const updateProfile = async (req, res) => {
 };
 
 // Change password
+
 export const changePassword = async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -85,20 +88,24 @@ export const changePassword = async (req, res) => {
       return errorResponse(res, 400, "All fields required");
     }
 
-    const isMatch = await bcrypt.compare(
-      currentPassword,
-      req.user.password
-    );
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return errorResponse(res, 404, "User not found");
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
 
     if (!isMatch) {
       return errorResponse(res, 401, "Current password incorrect");
     }
 
-    req.user.password = await bcrypt.hash(newPassword, 10);
-    await req.user.save();
+    user.password = await bcrypt.hash(newPassword, 10);
+    await user.save();
 
     return successResponse(res, 200, "Password updated");
   } catch (error) {
+    console.error("CHANGE PASSWORD ERROR:", error);
     return errorResponse(res, 500, "Server error");
   }
 };
