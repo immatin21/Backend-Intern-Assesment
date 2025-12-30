@@ -148,44 +148,44 @@ VITE_API_BASE_URL
 
 ## Deployment Links
 
-# Frontend (Vercel):
+### Frontend (Vercel):
 - https://usermanagement-pied.vercel.app
 
-# Backend (Render):
+### Backend (Render):
 - https://backend-user-management-5fl8.onrender.com
 
 ## API Documentation
 
-# Postman Collection:
+### Postman Collection:
 - https://www.postman.com/matinmondal/workspace/public-api-docs/collection/44571133-01c1d665-d071-4fbf-8083-36fa32f6f6a1?action=share&creator=44571133
 
-## The Postman collection includes:
+### The Postman collection includes:
 
 - Authentication APIs
 - Admin user management APIs
 - User profile APIs
 - Example requests and responses (200, 400, 401, 403)
 
-## Sample API Endpoints
+### Sample API Endpoints
 
-# Authentication
+#### Authentication
 
 - POST /api/auth/signup
 - POST /api/auth/login
 - GET /api/auth/me
 
-# Admin
+##### Admin
 
 - GET /api/users?page=1
 - PATCH /api/users/:id/status
 
-# User
+##### User
 
 - GET /api/users/profile
 - PATCH /api/users/profile
 - PATCH /api/users/change-password
 
-### Notes for Reviewers
+## Notes for Reviewers
 
 - All sensitive data is stored in environment variables and excluded via .gitignore
 - Role-based authorization is enforced at API level
@@ -193,7 +193,7 @@ VITE_API_BASE_URL
 - Project follows clean folder structure and modular design
 - Suitable for production deployment and further scaling
 
-### Author
+## Author
 
 - Matin Mondal
 - Backend Developer Intern Candidate
